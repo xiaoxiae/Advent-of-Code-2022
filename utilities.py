@@ -9,7 +9,7 @@ def success(text):
 
 
 def get_input(as_int=False, whole=False):
-    result = open("input", "r").read().strip()
+    result = open("input", "r").read()
     if not whole:
         result = result.splitlines()
     return list(map(int, result)) if as_int else result
