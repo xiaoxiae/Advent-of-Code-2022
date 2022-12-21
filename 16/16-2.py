@@ -4,6 +4,7 @@ sys.path.insert(0, "../")
 from utilities import success, get_input
 
 from itertools import combinations
+from collections import deque
 
 def subsets(s):
     """Not really since we're excluding empty set and s."""
@@ -32,11 +33,11 @@ valve_paths = {}
 for valve in non_zero_valves + ["AA"]:
     # run BFS
     visited = set()
-    queue = [(valve, 0)]
+    queue = deque([(valve, 0)])
     valve_paths[valve] = {}
 
     while len(queue) != 0:
-        current, distance = queue.pop(0)
+        current, distance = queue.popleft()
 
         if current in non_zero_valves:
             valve_paths[valve][current] = distance
@@ -54,12 +55,12 @@ subset_score = {}
 
 for subset in subsets(non_zero_valves):
     visited = {}
-    queue = [(26, "AA", set(), 0)]
+    queue = deque([(26, "AA", set(), 0)])
 
     max_pressure = 0
 
     while len(queue) != 0:
-        remaining, current, opened, pressure = queue.pop(0)
+        remaining, current, opened, pressure = queue.popleft()
 
         max_pressure = max(max_pressure, pressure)
 

@@ -3,6 +3,8 @@ import sys
 sys.path.insert(0, "../")
 from utilities import success, get_input
 
+from collections import deque
+
 
 valves = {}
 
@@ -38,11 +40,11 @@ for valve in valves:
     del valve_paths[valve][valve]
 
 
-queue = [(30, "AA", tuple(), 0)]
+queue = deque([(30, "AA", tuple(), 0)])
 max_pressure = 0
 
 while len(queue) != 0:
-    remaining, current, opened, pressure = queue.pop(0)
+    remaining, current, opened, pressure = queue.popleft()
 
     max_pressure = max(max_pressure, pressure)
 
